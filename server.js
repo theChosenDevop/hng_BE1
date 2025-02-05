@@ -11,15 +11,16 @@ app.use(cors());
 
 
 app.get("/api/classify-number", async (req, res) => {
-  const number = parseInt(req.query.number);
-
-  //  check if the number is not a number
-  if (!number || isNaN(number)) {
+  const num = req.query.number;
+   //  check if the query parameter is a valid number
+   if (!/^-?\d+$/.test(num)) {
     return res.status(400).json({
       number: "alphabet",
       error: true,
     });
   }
+  // convert the query parameter to an integer
+  const number = parseInt(num, 10); 
 
 //   fetch data from numbers API
   const fetchApi = async () => {
