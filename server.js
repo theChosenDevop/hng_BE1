@@ -26,7 +26,7 @@ app.get("/api/classify-number", async (req, res) => {
   };
 
 //  check if the number is not a number
-  if (isNaN(number)) {
+  if (!number || isNaN(number)) {
     return res.status(400).json({
       number: "alphabet",
       error: true,
